@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	float verticalMove;
 
 	Vector2 beginPoint, endPoint;
+	Vector3 dir = new Vector3(0, 0, 0);
 
 	Vector3 force;
 
@@ -17,7 +18,10 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
+		//Fix rotation to the direction of movement
+		transform.LookAt(transform.position + player.velocity - dir);
 
+	
 		//Touch input
 		if(Input.touchCount>0) {
 			Touch touchEvent = Input.touches[0];

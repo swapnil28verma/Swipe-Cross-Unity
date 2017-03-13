@@ -21,6 +21,7 @@ public class GuardController : MonoBehaviour {
 
 	void GotoNextPoint() {
 		// Returns if no points have been set up
+//		agent.transform.Rotate (new Vector3 (0, 90, 0));
 		if (points.Length == 0)
 			return;
 
@@ -36,7 +37,7 @@ public class GuardController : MonoBehaviour {
 	void Update () {
 		// Choose the next destination point when the agent gets
 		// close to the current one.
-		if (agent.remainingDistance < 0.5f)
+		if (agent.remainingDistance < 0.05f)
 			GotoNextPoint();
 
 		agent.destination = points[destPoint].position;
