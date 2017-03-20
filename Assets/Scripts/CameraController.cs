@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour {
 	private Vector3 to;
 	public float speed = 1.0f; 
 	public float angle = 0;
-	public bool singleRotate;
+	public bool singleRotate, antiClockwise;
 
 	void Start() {
 		from = new Vector3(0, this.transform.parent.rotation.eulerAngles.y - angle, 0);
@@ -16,8 +16,11 @@ public class CameraController : MonoBehaviour {
 
 	void Update() {
 		if (singleRotate) {
-//			transform.Rotate(new Vector3(0, transform.rotation.eulerAngles.y + 1, 0));
-			transform.Rotate(0, Time.deltaTime * speed * 100, 0);
+			if (antiClockwise) {
+				transform.Rotate (0, -Time.deltaTime * speed * 100, 0);
+			} else {
+				transform.Rotate (0, Time.deltaTime * speed * 100, 0);
+			}
 		}
 		else {
 			float t = Mathf.PingPong(Time.time * speed * 2.0f, 1.0f);
