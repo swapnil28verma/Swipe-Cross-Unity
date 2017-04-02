@@ -5,10 +5,9 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	private Rigidbody player;
-	float horizontalMove;
-	float verticalMove;
+	Vector3 movement;
 
-	Vector2 beginPoint, endPoint;
+	Vector3 beginPoint, endPoint;
 	Vector3 dir = new Vector3(0, 0, 0);
 
 	Vector3 force;
@@ -21,26 +20,34 @@ public class PlayerController : MonoBehaviour {
 		//Fix rotation to the direction of movement
 		transform.LookAt(transform.position + player.velocity - dir);
 
-	
-		//Touch input
-		if(Input.touchCount>0) {
-			Touch touchEvent = Input.touches[0];
-			if(touchEvent.phase == TouchPhase.Began) {
-				beginPoint = touchEvent.position;
-			}
-			else if(touchEvent.phase == TouchPhase.Ended) {
-				endPoint = touchEvent.position;
-			}
+		movement = Vector3.zero;
+		beginPoint = Vector3.zero;
+		endPoint = Vector3.zero;
 
-			horizontalMove = endPoint.x - beginPoint.x;
-			verticalMove = endPoint.y - beginPoint.y;
+		if (Input.GetMouseButtonDown (0)) {
+
+			Debug.Log ("Mouse button down");
+
+			player.velocity = Vector3.zero;
+			player.angularVelocity = Vector3.zero;
+
+			beginPoint = Input.mousePosition;
+			beginPoint.z = beginPoint.y;
+			beginPoint.y = 0;
+
+			endPoint = beginPoint;
+
+		} else if (Input.GetMouseButtonUp (0)) {
+
+			Debug.Log ("Mouse button uo");
+
+			endPoint = Input.mousePosition;
+			endPoint.z = endPoint.y;
+			endPoint.y = 0;
 		}
-		else {					//Keyboard input
-			horizontalMove = Input.GetAxis("Horizontal");
-			verticalMove = Input.GetAxis("Vertical");
-		}
-			
-		force = new Vector3(horizontalMove, 0, verticalMove);
-		player.AddForce(force * speed);
+		movement = endPoint - beginPoint;
+		Debug.Log (beginPoint);
+		Debug.Log (endPoint);
+		player.AddForce(movement * speed);
 	}
 }
