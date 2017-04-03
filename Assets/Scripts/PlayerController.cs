@@ -20,13 +20,7 @@ public class PlayerController : MonoBehaviour {
 		//Fix rotation to the direction of movement
 		transform.LookAt(transform.position + player.velocity - dir);
 
-		movement = Vector3.zero;
-		beginPoint = Vector3.zero;
-		endPoint = Vector3.zero;
-
 		if (Input.GetMouseButtonDown (0)) {
-
-			Debug.Log ("Mouse button down");
 
 			player.velocity = Vector3.zero;
 			player.angularVelocity = Vector3.zero;
@@ -39,15 +33,25 @@ public class PlayerController : MonoBehaviour {
 
 		} else if (Input.GetMouseButtonUp (0)) {
 
-			Debug.Log ("Mouse button uo");
-
 			endPoint = Input.mousePosition;
 			endPoint.z = endPoint.y;
 			endPoint.y = 0;
+
+			movement.x = endPoint.x - beginPoint.x;
+			movement.z = endPoint.z - beginPoint.z;
+
+			beginPoint = Vector3.zero;
+			endPoint = Vector3.zero;
+
 		}
-		movement = endPoint - beginPoint;
-		Debug.Log (beginPoint);
-		Debug.Log (endPoint);
+//		movement = endPoint - beginPoint;
+		Debug.Log (beginPoint + " begin Point");
+		Debug.Log (endPoint + " end Point");
+		Debug.Log (movement + " movement");
 		player.AddForce(movement * speed);
+
+		movement = Vector3.zero;
+
+
 	}
 }
