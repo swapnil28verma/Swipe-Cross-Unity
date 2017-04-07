@@ -9,7 +9,7 @@ public class LaserController : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player") {
 			attachedLaserRaycast.SetActive (!attachedLaserRaycast.activeSelf);
-			Debug.Log ("Button Pressed");
+			Debug.Log ("Laser Button Pressed");
 		}
 	}
 

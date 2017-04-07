@@ -44,10 +44,7 @@ public class PlayerController : MonoBehaviour {
 			endPoint = Vector3.zero;
 
 		}
-//		movement = endPoint - beginPoint;
-		Debug.Log (beginPoint + " begin Point");
-		Debug.Log (endPoint + " end Point");
-		Debug.Log (movement + " movement");
+
 		force = movement * speed;
 
 		if (force.x > maxForce) {
