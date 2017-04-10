@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public float speed, maxForce;
+	public float speed, maxForce = 1000f;
 	private Rigidbody player;
 	Vector3 movement;
 
@@ -32,20 +32,25 @@ public class PlayerController : MonoBehaviour {
 			endPoint = beginPoint;
 
 		} else if (Input.GetMouseButtonUp (0)) {
-
+			
 			endPoint = Input.mousePosition;
 			endPoint.z = endPoint.y;
 			endPoint.y = 0;
 
-			movement.x = endPoint.x - beginPoint.x;
-			movement.z = endPoint.z - beginPoint.z;
+			if (beginPoint == endPoint) {
+				movement = Vector3.zero;
+			} else {
+				movement.x = endPoint.x - beginPoint.x;
+				movement.z = endPoint.z - beginPoint.z;
+			}
 
 			beginPoint = Vector3.zero;
 			endPoint = Vector3.zero;
 
 		}
-
+			
 		force = movement * speed;
+
 
 		if (force.x > maxForce) {
 			force.x = maxForce;
