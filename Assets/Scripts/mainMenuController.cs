@@ -51,6 +51,6 @@ public class mainMenuController : MonoBehaviour {
 	}
 
 	public void PlayPress() {
-		SceneManager.LoadScene ("First"); 
+		SceneManager.LoadScene ("move_test"); 
 	}
 }

@@ -6,7 +6,7 @@ public class GateController : MonoBehaviour {
 
 	public GameObject Gate, Gate2;
 	public Transform open1, open2;
-	private bool isGateClosed = true;
+	public bool isGateClosed = true;
 	private Vector3 closedPosition1, closedPosition2;
 	public float smoothing = 4f;
 
