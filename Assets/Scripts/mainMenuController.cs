@@ -7,11 +7,14 @@ using UnityEngine.SceneManagement;
 public class mainMenuController : MonoBehaviour {
 
 	public Canvas quitMenu;
+	public Canvas creditMenu;
+	public Canvas mainMenu;
 	public Button playButton;
 	public Button exitButton;
 	public Button volButton;
 	public Button shareButton;
-
+	public Button creditsButton;
+	public Camera mainCamera;
 
 
 	// Use this for initialization
@@ -20,37 +23,54 @@ public class mainMenuController : MonoBehaviour {
 		quitMenu = quitMenu.GetComponent<Canvas> ();
 		quitMenu.enabled = false;
 
+		creditMenu = creditMenu.GetComponent<Canvas> ();
+		creditMenu.enabled = false;
+
+		mainMenu = mainMenu.GetComponent<Canvas> ();
+
+		mainCamera = mainCamera.GetComponent<Camera> ();
+
 		playButton = playButton.GetComponent<Button> ();
 		exitButton = exitButton.GetComponent<Button> ();
 		volButton = volButton.GetComponent<Button> ();
 		shareButton = shareButton.GetComponent<Button> ();
+		creditsButton = creditsButton.GetComponent<Button> ();
 		
 	}
 	
 	public void QuitPress() {
-		quitMenu.enabled = true;
+		mainCamera.GetComponent<ViewMovementController> ().moveToQuitTransform ();
 
-		playButton.enabled = false;
-		exitButton.enabled = false;
-		volButton.enabled = false;
-		shareButton.enabled = false;
+		quitMenu.enabled = true;
+		mainMenu.enabled = false;
 	}
 
 	public void QuitConfirm() {
 		Application.Quit ();
 	}
-
-	public void NoPress() {
 		
-		quitMenu.enabled = false;
+	public void NoPress() {
+		mainCamera.GetComponent<ViewMovementController> ().moveToMainMenuTransform ();
 
-		playButton.enabled = true;
-		exitButton.enabled = true;
-		volButton.enabled = true;
-		shareButton.enabled = true;
+		quitMenu.enabled = false;
+		mainMenu.enabled = true;
 	}
 
 	public void PlayPress() {
 		SceneManager.LoadScene ("move_test"); 
+	}
+
+	public void CreditsPress() {
+		mainCamera.GetComponent<ViewMovementController> ().moveToCreditTransform ();
+
+		creditMenu.enabled = true;
+		mainMenu.enabled = false;
+	}
+
+	public void BackPress(Canvas current) {
+		mainCamera.GetComponent<ViewMovementController> ().moveToMainMenuTransform ();
+
+		current.enabled = false;
+		mainMenu.enabled = true;
 	}
 }
