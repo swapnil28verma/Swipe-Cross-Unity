@@ -22,6 +22,11 @@ public class ViewMovementController : MonoBehaviour {
 		StartCoroutine ("moveCamera", quitTransform);
 	}
 
+	public void moveToPlayTransform() {
+		StopCoroutine ("moveCamera");
+		StartCoroutine ("moveCamera", playTransform);
+	}
+
 	IEnumerator moveCamera(Transform finalPosition) {
 		float elapsedTime = 0;
 

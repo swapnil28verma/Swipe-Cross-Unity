@@ -9,6 +9,7 @@ public class mainMenuController : MonoBehaviour {
 	public Canvas quitMenu;
 	public Canvas creditMenu;
 	public Canvas mainMenu;
+	public Canvas levelSelect;
 	public Button playButton;
 	public Button exitButton;
 	public Button volButton;
@@ -25,6 +26,9 @@ public class mainMenuController : MonoBehaviour {
 
 		creditMenu = creditMenu.GetComponent<Canvas> ();
 		creditMenu.enabled = false;
+
+		levelSelect = levelSelect.GetComponent<Canvas> ();
+		levelSelect.enabled = false;
 
 		mainMenu = mainMenu.GetComponent<Canvas> ();
 
@@ -57,7 +61,10 @@ public class mainMenuController : MonoBehaviour {
 	}
 
 	public void PlayPress() {
-		SceneManager.LoadScene ("move_test"); 
+		mainCamera.GetComponent<ViewMovementController> ().moveToPlayTransform ();
+
+		levelSelect.enabled = true;
+		mainMenu.enabled = false;
 	}
 
 	public void CreditsPress() {
