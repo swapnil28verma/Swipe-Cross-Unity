@@ -12,11 +12,13 @@ public class mainMenuController : MonoBehaviour {
 	public Canvas levelSelect;
 	public Button playButton;
 	public Button exitButton;
-	public Button volButton;
+	public Toggle volButton;
 	public Button shareButton;
 	public Button creditsButton;
 	public Camera mainCamera;
 
+	public Sprite volSprite, volMuteSprite;
+	private bool isMute = false;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +38,7 @@ public class mainMenuController : MonoBehaviour {
 
 		playButton = playButton.GetComponent<Button> ();
 		exitButton = exitButton.GetComponent<Button> ();
-		volButton = volButton.GetComponent<Button> ();
+		volButton = volButton.GetComponent<Toggle> ();
 		shareButton = shareButton.GetComponent<Button> ();
 		creditsButton = creditsButton.GetComponent<Button> ();
 		
@@ -79,5 +81,18 @@ public class mainMenuController : MonoBehaviour {
 
 		current.enabled = false;
 		mainMenu.enabled = true;
+	}
+
+	public void VolumePress() {
+
+		if (isMute) {
+
+			volButton.GetComponent<Image> ().sprite = volSprite;
+		} else {
+			volButton.GetComponent<Image> ().sprite = volMuteSprite;
+		}
+		isMute = !isMute;
+
+		print (isMute);
 	}
 }
